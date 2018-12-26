@@ -1,19 +1,14 @@
 FROM pipill/armhf-alpine-glibc
 
 # --- general --- #
-# ARG work_dir=/tmp/setup
-# RUN mkdir ${work_dir} && \
-# chmod 777 ${work_dir}
+ARG work_dir=/tmp/setup
+RUN mkdir ${work_dir} && \
+chmod 777 ${work_dir}
 
 # --- Roswell --- #
-RUN apk add --no-cache git automake autoconf make gcc build-base
-
-RUN apk add --no-cache curl-dev curl glib-dev 
-
-RUN apk add --no-cache 6libressl-dev ncurses-dev sqlite libev-dev
-
-RUN git clone --depth=1 -b release https://github.com/roswell/roswell.git && \
-#cd ${work_dir} && \
+RUN apk add --no-cache git automake autoconf make gcc build-base curl-dev curl glib-dev libressl-dev ncurses-dev sqlite libev-dev && \
+cd ${work_dir} && \
+git clone --depth=1 -b release https://github.com/roswell/roswell.git && \
 cd roswell && \
 sh bootstrap && \
 ./configure --disable-manual-install && \
@@ -26,9 +21,3 @@ ros run -q
 
 # --- Add PATH to roswell/bin --- #
 ENV PATH /root/.roswell/bin:${PATH}
-
-# --- Lem --- #
-RUN ln -s ${HOME}/.roswell/local-projects work && \
-ros install cxxxr/lem && \
-mv ${HOME}/.roswell/bin/lem ${HOME}/.roswell/bin/lem2 && \
-mv ${HOME}/.roswell/bin/lem-ncurses ${HOME}/.roswell/bin/lem
