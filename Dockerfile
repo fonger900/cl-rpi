@@ -1,10 +1,6 @@
-FROM  hbrobotics/ros-base:rpi3
+FROM arm32v6/alpine:latest
 
-RUN git clone git://git.qemu.org/qemu.git && \
-cd qemu && \
-./configure --target-list=arm-linux-user --static && \
-make && \
-make install
+ADD qemu-arm-static /usr/bin
 
 # --- general --- #
 ARG work_dir=/tmp/setup
