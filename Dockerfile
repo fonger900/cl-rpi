@@ -1,4 +1,5 @@
-FROM pipill/armhf-alpine-glibc
+FROM arm32v6/alpine:3.6
+COPY tmp/qemu-arm-static /usr/bin/qemu-arm-static
 
 # --- general --- #
 ARG work_dir=/tmp/setup
