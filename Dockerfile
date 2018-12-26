@@ -1,6 +1,14 @@
 FROM arm32v6/alpine:latest
 
+RUN git clone git://git.qemu.org/qemu.git && \
+cd qemu && \
+./configure --target-list=arm-linux-user --static && \
+make && \
+make install
+
 ADD qemu-arm-static /usr/bin
+
+RUN [ "/usr/bin/qemu-arm", "/bin/echo", "Hello from ARM container" ]
 
 # --- general --- #
 ARG work_dir=/tmp/setup
