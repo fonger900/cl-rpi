@@ -6,8 +6,6 @@ cd qemu && \
 make && \
 make install
 
-COPY ./qemu-arm-static /usr/bin/qemu-arm-static
-
 # --- general --- #
 ARG work_dir=/tmp/setup
 RUN mkdir ${work_dir} && \
