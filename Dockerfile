@@ -1,5 +1,11 @@
 FROM  hbrobotics/ros-base:rpi3
 
+RUN git clone git://git.qemu.org/qemu.git && \
+cd qemu && \
+./configure --target-list=arm-linux-user --static && \
+make && \
+make install
+
 COPY ./qemu-arm-static /usr/bin/qemu-arm-static
 
 # --- general --- #
