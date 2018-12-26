@@ -1,8 +1,6 @@
-FROM arm32v6/alpine:3.6
+FROM  hbrobotics/ros-base:rpi3
 
-RUN ldd qemu-arm
-
-COPY qemu-arm /usr/bin/qemu-arm-static
+COPY ./qemu-arm-static /usr/bin/qemu-arm-static
 
 # --- general --- #
 ARG work_dir=/tmp/setup
